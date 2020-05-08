@@ -19,6 +19,14 @@ import { SearchFilterPageModule } from './pages/modal/search-filter/search-filte
 import { NotificationsComponent } from './components/notifications/notifications.component';
 
 
+//  firebase imports, remove what you don't require
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
+
+
 @NgModule({
   declarations: [AppComponent, NotificationsComponent],
   imports: [
@@ -28,7 +36,11 @@ import { NotificationsComponent } from './components/notifications/notifications
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,
-    SearchFilterPageModule
+    SearchFilterPageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   entryComponents: [NotificationsComponent],
   providers: [
