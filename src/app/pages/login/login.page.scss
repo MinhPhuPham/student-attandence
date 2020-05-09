@@ -1,0 +1,23 @@
+:host {
+    ion-content {
+        --background: linear-gradient(135deg, var(--ion-color-dark), var(--ion-color-primary));
+    }
+
+}
+
+.footer{
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    width: 90%;
+    p{
+        color: rgba(235, 167, 42, 0.89);
+    }
+}
+.paz {
+    position: relative;
+    z-index: 10;
+}
+.btn-sign{
+    margin-top: 30px;
+}

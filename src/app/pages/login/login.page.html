@@ -1,0 +1,63 @@
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div padding-horizontal class="animated fadeInDown" style="text-align: center;">
+      <div class="logo"></div>
+      <h4 no-margin>
+        <ion-text color="light" class="fw700">
+          Student Attendance
+        </ion-text>
+      </h4>
+    </div>
+
+    <!-- Login form -->
+    <form [formGroup]="onLoginForm" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          Email
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
+        <ion-text color="warning">
+          Required Field
+        </ion-text>
+      </p>
+
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="lock-closed"></ion-icon>
+          Password
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <p ion-text color="warning" class="text08" *ngIf="onLoginForm.get('password').touched && onLoginForm.get('password').hasError('required')">
+        <ion-text color="warning">
+          Required Field
+        </ion-text>
+        </p>
+    </form>
+
+
+    <div>
+      <ion-button icon-left size="medium" class="btn-sign" expand="full" shape="round" color="dark" (click)="Login()" [disabled]="!onLoginForm.valid" tappable>
+        <ion-icon name="log-in"></ion-icon>
+        Signin
+      </ion-button>
+
+    </div>
+
+    <p style="text-align: center;padding-top: 20px;" tappable (click)="forgotPass()" class="paz">
+      <ion-text color="light">
+        <strong>Forgot Password?</strong>
+      </ion-text>
+    </p>
+  </div>
+  <div class="footer">
+    <p>Copy right @2020 by Jable Team</p>
+  </div>
+</ion-content>
+

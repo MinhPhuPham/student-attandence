@@ -1,5 +1,7 @@
 {
-  "name": "student",
-  "integrations": {},
+  "name": "Student Attendance",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
