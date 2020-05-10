@@ -27,7 +27,7 @@ data;
   yourLocation = '123 Test Street';
   themeCover = 'assets/img/ionic4-Start-Theme-cover.jpg';
 
-  constructor(
+   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
@@ -36,9 +36,12 @@ data;
     public toastCtrl: ToastController,
     private user:UserService
   ) {
-    this.data =this.user.getTeachersList();
+    
+    
+    
   }
-  ngOnInit() {
+  async ngOnInit() {
+    this.data=localStorage.getItem('token')
   }
 
   ionViewWillEnter() {

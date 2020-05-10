@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'search-filter',
     loadChildren: () => import('./pages/modal/search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
-  },
+  }
 ];
 
 @NgModule({

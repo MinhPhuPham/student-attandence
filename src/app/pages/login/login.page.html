@@ -21,7 +21,7 @@
         </ion-label>
         <ion-input color="secondary" type="email" formControlName="email"></ion-input>
       </ion-item>
-      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">
+      <p ion-text class="text08" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required') && Email.invalid">
         <ion-text color="warning">
           Required Field
         </ion-text>
@@ -47,7 +47,9 @@
         <ion-icon name="log-in"></ion-icon>
         Signin
       </ion-button>
-
+<ion-button (click)="Login()">
+  Click me
+</ion-button>
     </div>
 
     <p style="text-align: center;padding-top: 20px;" tappable (click)="forgotPass()" class="paz">

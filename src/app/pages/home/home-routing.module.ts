@@ -6,7 +6,18 @@ import { HomePage } from './home.page';
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: HomePage,
+    children: [
+      
+      {
+        path: 'students',
+        loadChildren: () => import('../../pages/students/students.module').then( m => m.StudentsPageModule)
+      },
+      {
+        path: 'subjects',
+        loadChildren: () => import('../../pages/subjects/subjects.module').then( m => m.SubjectsPageModule)
+      },
+    ]
   }
 ];
 
@@ -14,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomePageRoutingModule {}
+export class HomePageRoutingModule { }

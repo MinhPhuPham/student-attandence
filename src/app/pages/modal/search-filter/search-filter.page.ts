@@ -9,8 +9,8 @@ import { ModalController } from '@ionic/angular';
 export class SearchFilterPage implements OnInit {
   public radiusmiles = 1;
   public minmaxprice = {
-    upper: 500,
-    lower: 10
+    upper: 30,
+    lower: 18
   };
 
   constructor(private modalCtrl: ModalController) { }

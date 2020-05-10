@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
-import {UserService} from '../../services/user.service';
+import { UserService } from '../../services/user.service';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -9,7 +10,6 @@ import {UserService} from '../../services/user.service';
 })
 export class LoginPage implements OnInit {
   public onLoginForm: FormGroup;
-
   constructor(
     public navCtrl: NavController,
     public menuCtrl: MenuController,
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private user :UserService
+    private user: UserService
   ) { }
 
   ionViewWillEnter() {
@@ -27,7 +27,9 @@ export class LoginPage implements OnInit {
 
     this.onLoginForm = this.formBuilder.group({
       'email': [null, Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"),
+        Validators.email
       ])],
       'password': [null, Validators.compose([
         Validators.required
@@ -79,14 +81,52 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
-
-  // // //
-  goToRegister() {
-    this.navCtrl.navigateRoot('/register');
+  get Email() {
+    return this.onLoginForm.get('email');
+  }
+  get Password() {
+    return this.onLoginForm.get('password');
   }
 
-  goToHome() {
-    this.navCtrl.navigateRoot('/home');
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: 'Bad email or password',
+      duration: 2000
+    });
+    toast.present();
+  }
+  async Login() {
+    let user = {
+      username: this.Email.value,
+      password: this.Password.value
+    }
+    let user2={
+      username: 'tamtotran5667@gmail.com',
+      password: 'myPassword'
+    }
+    this.user.httpPost(user2).subscribe((res:any)=>{
+      let data =res.data
+      console.log(data);
+      localStorage.setItem('token',data.token)
+    },
+    
+    error =>{
+      this.presentToast
+      console.log(error);
+      
+    },
+    async ()=>{ 
+      await this.navCtrl.navigateRoot('/home');
+      console.log('suucess');
+      
+      const toast =  await this.toastCtrl.create({
+        message: 'Success full to login',
+        duration: 1500
+      });
+      toast.present();
+      
+    })
+
   }
 
 }
