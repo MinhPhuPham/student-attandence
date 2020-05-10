@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
-
+import {UserService} from '../../services/user.service'
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,10 +12,18 @@ export class EditProfilePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private userservice: UserService
     ) { }
-
-  ngOnInit() {
+    user_data;
+    
+  async ngOnInit() {
+    let user:any;
+    user= await this.userservice.getTeachersList();
+    this.user_data = await user.data;
+    console.log(this.user_data);
+    
+    
   }
 
   async sendData() {
@@ -26,10 +34,11 @@ export class EditProfilePage implements OnInit {
     loader.present();
     loader.onWillDismiss().then(async l => {
       const toast = await this.toastCtrl.create({
-        cssClass: 'bg-profile',
+        cssClass: 'success',
         message: 'Your Data was Edited!',
-        duration: 3000,
-        position: 'bottom'
+        duration: 0,
+        position: 'bottom',
+        color: "medium"
       });
 
       toast.present();

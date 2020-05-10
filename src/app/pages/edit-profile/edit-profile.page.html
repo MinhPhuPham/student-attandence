@@ -7,16 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="profile">
+<ion-content class="profile" *ngIf='user_data'>
   <ion-card no-margin>
     <ion-card-content class="bg-profile">
       <img src="assets/img/avatar.jpeg">
-      <h1 class="fw500">João Firmino</h1>
-      <h2 color="light" margin-bottom>Customer</h2>
-      <ion-button icon-left color="secondary">
-        <ion-icon name="photos"></ion-icon> 
-        Change / Add Avatar
-      </ion-button>
+      <h1 class="fw500">{{user_data.name}}</h1>
+      <h2 color="light" margin-bottom style="padding-top:5px;margin-bottom: -5px !important;">{{user_data.email}}</h2>
     </ion-card-content>
   
     <ion-grid fixed no-padding>
@@ -25,48 +21,32 @@
 
           <ion-list margin-bottom>
             <ion-list-header color="light">
-              <ion-label class="fw700">Form</ion-label>
+              <ion-label class="fw700" style="text-align: center;">Information of <span style="color: rgb(236, 124, 43);"> {{user_data.role}}</span></ion-label>
             </ion-list-header>
 
             <ion-item>
               <ion-label color="dark" position="stacked">Full Name:</ion-label>
-              <ion-input inputmode="text" placeholder="Ex..: Joe Doe" value="João Firmino"></ion-input>
+              <ion-input inputmode="text" placeholder="Ex: Jable Johnson" value="{{user_data.name}}" ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label color="dark" position="stacked">Birth Day:</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"value="{{user_data.birthday}}" >
+              </ion-datetime>
             </ion-item>
     
             <ion-item>
               <ion-label color="dark" position="stacked">Email:</ion-label>
-              <ion-input inputmode="email" placeholder="Ex.: joe@doe.com" value="firminoata@gmail.com"></ion-input>
+              <ion-input inputmode="email" placeholder="Ex.: joe@doe.com" value="{{user_data.email}}"></ion-input>
             </ion-item>
     
             <ion-item>
               <ion-label color="dark" position="stacked">Address:</ion-label>
-              <ion-input inputmode="text" placeholder="Ex.: Abey Road 5"></ion-input>
+              <ion-input inputmode="text" placeholder="Ex.: Abey Road 5" value ="{{user_data.address}}"></ion-input>
             </ion-item>
-    
             <ion-item>
-              <ion-label color="dark">City</ion-label>
-              <ion-select>
-                <ion-select-option value="nes">New York</ion-select-option>
-                <ion-select-option value="n64">Los Angeles</ion-select-option>
-                <ion-select-option value="ps">London</ion-select-option>
-                <ion-select-option value="genesis">Paris</ion-select-option>
-                <ion-select-option value="saturn">São Paulo</ion-select-option>
-                <ion-select-option value="snes">Tokyo</ion-select-option>
-                <ion-select-option value="snes">New Delhi</ion-select-option>
-              </ion-select>
-            </ion-item>
-    
-            <ion-item>
-              <ion-label color="dark">State</ion-label>
-              <ion-select>
-                <ion-select-option value="nes">NY</ion-select-option>
-                <ion-select-option value="n64">CA</ion-select-option>
-                <ion-select-option value="ps">Greater London</ion-select-option>
-                <ion-select-option value="genesis">Paris</ion-select-option>
-                <ion-select-option value="saturn">SP</ion-select-option>
-                <ion-select-option value="snes">Kantō</ion-select-option>
-                <ion-select-option value="snes">Delhi</ion-select-option>
-              </ion-select>
+              <ion-label color="dark" position="stacked">Phone number:</ion-label>
+              <ion-input type="number" placeholder="Ex.: 1234567890" value="{{user_data.phone}}"></ion-input>
             </ion-item>
           </ion-list>
   

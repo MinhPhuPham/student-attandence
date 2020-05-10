@@ -106,12 +106,10 @@ export class LoginPage implements OnInit {
     }
     this.user.httpPost(user2).subscribe((res:any)=>{
       let data =res.data
-      console.log(data);
       localStorage.setItem('token',data.token)
     },
     
     error =>{
-      this.presentToast
       console.log(error);
       
     },
@@ -120,8 +118,9 @@ export class LoginPage implements OnInit {
       console.log('suucess');
       
       const toast =  await this.toastCtrl.create({
-        message: 'Success full to login',
-        duration: 1500
+        message: 'Welcome to app!!!',
+        duration: 1500, 
+        color: "success"
       });
       toast.present();
       

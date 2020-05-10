@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: HomePage,
     children: [
-      
+
       {
         path: 'students',
         loadChildren: () => import('../../pages/students/students.module').then( m => m.StudentsPageModule)
@@ -17,7 +17,16 @@ const routes: Routes = [
         path: 'subjects',
         loadChildren: () => import('../../pages/subjects/subjects.module').then( m => m.SubjectsPageModule)
       },
+      {path:'',
+      redirectTo:'subjects',
+      pathMatch: "full"
+      }
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'subjects',
+    pathMatch: 'full'
   }
 ];
 
