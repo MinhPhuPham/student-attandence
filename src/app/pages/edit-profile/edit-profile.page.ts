@@ -21,9 +21,6 @@ export class EditProfilePage implements OnInit {
     let user:any;
     user= await this.userservice.getTeachersList();
     this.user_data = await user.data;
-    console.log(this.user_data);
-    
-    
   }
 
   async sendData() {

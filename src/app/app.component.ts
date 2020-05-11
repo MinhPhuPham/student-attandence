@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {UserService} from './services/user.service'
+import { Router } from '@angular/router';
 
 import { Pages } from './interfaces/pages';
 
@@ -14,12 +16,14 @@ import { Pages } from './interfaces/pages';
 export class AppComponent {
 
   public appPages: Array<Pages>;
-
+  user_data
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private userservice: UserService,
+    public router: Router
   ) {
     this.appPages = [
       {
@@ -44,6 +48,14 @@ export class AppComponent {
     ];
 
     this.initializeApp();
+    this.getdata();
+  }
+  
+  async getdata(){
+    let user:any;
+    user= await this.userservice.getTeachersList();
+    return this.user_data = await user.data;
+    
   }
 
   initializeApp() {
@@ -58,6 +70,7 @@ export class AppComponent {
   }
 
   logout() {
-    this.navCtrl.navigateRoot('/');
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }

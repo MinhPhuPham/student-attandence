@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-login',
@@ -17,8 +18,14 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private user: UserService
-  ) { }
+    private user: UserService,
+    private router: Router
+  ) {
+    const tokey_key = localStorage.getItem('token');
+    if(tokey_key){
+      this.router.navigate(['/home']);
+    }
+  }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
@@ -95,7 +102,9 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+  
   async Login() {
+    this.user.loadingPresent();
     let user = {
       username: this.Email.value,
       password: this.Password.value
@@ -120,8 +129,10 @@ export class LoginPage implements OnInit {
       const toast =  await this.toastCtrl.create({
         message: 'Welcome to app!!!',
         duration: 1500, 
-        color: "success"
+        color: "success",
+        cssClass:"login_success"
       });
+      this.user.loadingDismiss()
       toast.present();
       
     })
