@@ -15,7 +15,7 @@ export class ClassPage implements OnInit {
     ngOnInit() {
       this.route.paramMap.subscribe(params => {
         let subject_id = parseInt(params.get('subject_id'))
-  
+        this.classes.length=0
          this.listClasses.filter(classes => {
            if(classes.subject_id === subject_id){
              this.classes.push(classes)
@@ -25,9 +25,6 @@ export class ClassPage implements OnInit {
         
       })
       console.log(this.classes);
-      
-      
-      console.log('is work');
-      
+
     }
 }

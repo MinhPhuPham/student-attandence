@@ -19,6 +19,7 @@ export class UserService {
   subjects: Array<Subject>
 
   private api_url = 'http://ec2-54-161-212-167.compute-1.amazonaws.com:8080'
+  private api_url2= 'https://muster-api.herokuapp.com'
 
   // Constructor
   constructor(private http: HttpClient,

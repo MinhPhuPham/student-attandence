@@ -11,11 +11,18 @@ export class CheckStudentsComponent implements OnInit {
   listStudents=[...Students];
   students=[];
   constructor(private route: ActivatedRoute, private location:Location) { }
-
+  sliderConfig = {
+    // slidesPerView: 1.6,
+    initialSlide: 1,
+    speed: 400,
+    spaceBetween: 10,
+    centeredSlides: true
+  };
   ngOnInit() {
+    
     this.route.paramMap.subscribe(params => {
       let classes_id = parseInt(params.get('class_id'))
-
+      this.students.length=0
        this.listStudents.filter(students => {
          if(students.classes_id === classes_id){
            this.students.push(students)
@@ -24,10 +31,6 @@ export class CheckStudentsComponent implements OnInit {
       })[0]
       
     })
-    console.log(this.students);
-    
-    
-    console.log('is work');
     
   }
 

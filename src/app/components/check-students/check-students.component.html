@@ -5,8 +5,38 @@
     </ion-buttons>
     <ion-title>Check Students</ion-title>
   </ion-toolbar>
+  <ion-toolbar >
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button style="border-right:.5px solid  rgb(218, 206, 206); ;" >
+          <ion-icon name="people-circle"></ion-icon>
+          <ion-label>Class <br> 11A </ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button >
+          <ion-icon name="podium"></ion-icon>
+          <ion-label>Subjects <br> sb name </ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  style="border-left: 1px solid rgb(218, 206, 206);" >
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>Date <br> 21-1-2020</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="students">
+
+  <ion-slides [options]="sliderConfig">
+    <ion-slide >
+      <ion-button color="success" (click)="selectall()">Mask all</ion-button>
+      <ion-button color="warning">Mask as unread</ion-button>
+      <ion-button color="danger">Danger</ion-button>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-card>
   <ion-list *ngFor="let student of students">
     <ion-item>
       <ion-avatar slot="start">
@@ -16,7 +46,9 @@
         <h1 style="color: rgb(144, 54, 228);">{{student.student_name}}</h1>
       </ion-label>
       
-      <ion-checkbox color="secondary" [(ngModel)]="student.isChecked" slot="end"></ion-checkbox>
+      <ion-checkbox color="secondary" [(ngModel)]="student.isChecked" [checked]="selectedAll" slot="end"></ion-checkbox>
     </ion-item>
   </ion-list>
+</ion-card>
+
 </ion-content>
