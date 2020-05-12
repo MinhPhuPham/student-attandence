@@ -8,8 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { PopmenuComponent } from './../../components/popmenu/popmenu.component';
 
-// import {SubjectsComponent} from './../../components/subjects/subjects.component'
-// import {StudentsComponent} from './../../components/students/students.component'
+import {CheckStudentsComponent} from '../../components/check-students/check-students.component'
 import { HomePage } from './home.page';
 
 @NgModule({
@@ -19,6 +18,6 @@ import { HomePage } from './home.page';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, PopmenuComponent,]
+  declarations: [HomePage, PopmenuComponent,CheckStudentsComponent]
 })
 export class HomePageModule {}

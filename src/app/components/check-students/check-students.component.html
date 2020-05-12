@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="Back()">
+      <ion-icon slot="start" name="arrow-back" style="padding-left: 10px;"></ion-icon>
+    </ion-buttons>
+    <ion-title>Check Students</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="students">
+  <ion-list *ngFor="let student of students">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="../../../assets/img/avatar.jpg" alt="ion">
+      </ion-avatar>
+      <ion-label>
+        <h1 style="color: rgb(144, 54, 228);">{{student.student_name}}</h1>
+      </ion-label>
+      
+      <ion-checkbox color="secondary" [(ngModel)]="student.isChecked" slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>

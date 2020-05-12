@@ -104,7 +104,7 @@ export class LoginPage implements OnInit {
   }
   
   async Login() {
-    this.user.loadingPresent();
+    // this.user.loadingPresent();
     let user = {
       username: this.Email.value,
       password: this.Password.value
@@ -132,7 +132,7 @@ export class LoginPage implements OnInit {
         color: "success",
         cssClass:"login_success"
       });
-      this.user.loadingDismiss()
+      // this.user.loadingDismiss()
       toast.present();
       
     })

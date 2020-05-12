@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'search-filter',
     loadChildren: () => import('./pages/modal/search-filter/search-filter.module').then( m => m.SearchFilterPageModule)
+  },
+  {
+    path: 'class',
+    loadChildren: () => import('./pages/class/class.module').then( m => m.ClassPageModule)
   }
 ];
 

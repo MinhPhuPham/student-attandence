@@ -8,6 +8,7 @@ import {
   ModalController } from '@ionic/angular';
 import {UserService} from '../../services/user.service';
 import {HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 // Modals
 import { SearchFilterPage } from '../../pages/modal/search-filter/search-filter.page';
@@ -24,7 +25,7 @@ import {Subjects} from '../../../assets/mocks_data/subjects'
 })
 export class SubjectsPage implements OnInit {
   data;
-  
+  listSubjects=[];
   searchKey = '';
     yourLocation = '123 Test Street';
     themeCover = 'assets/img/ionic4-Start-Theme-cover.jpg';
@@ -36,10 +37,11 @@ export class SubjectsPage implements OnInit {
       public modalCtrl: ModalController,
       public toastCtrl: ToastController,
       private user:UserService,
-      private http:HttpClient
+      private router: Router
     ) { }
     async ngOnInit() {
-      this.data=localStorage.getItem('token');
+      this.listSubjects= Subjects.map((Subjects,i) => Subjects)
+      console.log(this.listSubjects);
       
     }
   
@@ -113,6 +115,9 @@ export class SubjectsPage implements OnInit {
         showBackdrop: true
       });
       return await popover.present();
+    }
+    GotoClass(subject){
+      this.navCtrl.navigateRoot(['home/subjects/classes/',subject.subject_id]);
     }
 
 }

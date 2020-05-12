@@ -1,41 +1,41 @@
 export const Classes =[{
     "subject_id": 4,
-    "class_id": "Eayo",
+    "class_id": 1,
     "class_name": "Consumer Durables"
   }, {
     "subject_id": 5,
-    "class_id": "Abata",
+    "class_id": 2,
     "class_name": "Finance"
   }, {
     "subject_id": 2,
-    "class_id": "Yodel",
+    "class_id": 3,
     "class_name": "Basic Industries"
   }, {
     "subject_id": 5,
-    "class_id": "Rhynyx",
+    "class_id": 4,
     "class_name": "Consumer Durables"
   }, {
     "subject_id": 5,
-    "class_id": "Kamba",
+    "class_id": 5,
     "class_name": "n/a"
   }, {
     "subject_id": 4,
-    "class_id": "Layo",
+    "class_id": 6,
     "class_name": "Finance"
   }, {
     "subject_id": 2,
-    "class_id": "Thoughtstorm",
+    "class_id": 7,
     "class_name": "Consumer Durables"
   }, {
     "subject_id": 2,
-    "class_id": "Yozio",
-    "class_name": "n/a"
+    "class_id": 8,
+    "class_name": "Distruct"
   }, {
     "subject_id": 5,
-    "class_id": "Edgewire",
+    "class_id": 9,
     "class_name": "Energy"
   }, {
     "subject_id": 2,
-    "class_id": "Oodoo",
+    "class_id": 10,
     "class_name": "Finance"
   }]

@@ -25,21 +25,19 @@
 </ion-toolbar>
 </ion-header>
 <ion-content  fullscreen>
-
-  <ion-list >
-    <ion-item>
+  <ion-list *ngFor="let subject of listSubjects">
+    <ion-item (click)="GotoClass(subject)"  >
       <ion-avatar slot="start">
-        <img src="../../../assets/img/letter-s-logo.png" alt="ion">
+        <img src="{{subject.subject_img}}" alt="ion">
       </ion-avatar>
       <ion-label>
-        <h2>Subjects</h2>
+        <h2>{{subject.subject_name}}</h2>
         <h3>I can handle myself</h3>
         <p>You will remove these restraints and leave...</p>
       </ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
-
-    <ion-item>
+    <!-- <ion-item>
       <ion-avatar slot="start">
         <img src="../../../assets/img/angular-icon.svg" alt="ion">
       </ion-avatar>
@@ -49,7 +47,7 @@
         <p>You will remove these restraints and leave...</p>
       </ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
   
 </ion-content>
