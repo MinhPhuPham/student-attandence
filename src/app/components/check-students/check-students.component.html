@@ -46,7 +46,7 @@
         <h1 style="color: rgb(144, 54, 228);">{{student.student_name}}</h1>
       </ion-label>
       
-      <ion-checkbox color="secondary" [(ngModel)]="student.isChecked" [checked]="selectedAll" slot="end"></ion-checkbox>
+      <ion-checkbox color="secondary"*ngIf='!selectedAll'  [(ngModel)]="student.status" [checked]="selectedAll" slot="end"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-card>

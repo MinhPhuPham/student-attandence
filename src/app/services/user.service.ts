@@ -18,8 +18,8 @@ const httpOptions = {
 export class UserService {
   subjects: Array<Subject>
 
-  private api_url = 'http://ec2-54-161-212-167.compute-1.amazonaws.com:8080'
-  private api_url2= 'https://muster-api.herokuapp.com'
+  private api_url = 'http://ec2-18-141-177-210.ap-southeast-1.compute.amazonaws.com:8080'
+  private api_url2= 'https://main.musterapis.xyz'
 
   // Constructor
   constructor(private http: HttpClient,
@@ -51,7 +51,7 @@ export class UserService {
 
   /* Method to login database */
   httpPost(data: User): Observable<User> {
-    return this.http.post(`${this.api_url}/login`, data)
+    return this.http.post(`${this.api_url2}/login`, data)
       .pipe(
         map((response: any) => response)
 
@@ -73,8 +73,12 @@ export class UserService {
 
 
   async getTeachersList() {
-    const promise = await this.http.get(`${this.api_url}/profile`, httpOptions);
+    const promise = await this.http.get(`${this.api_url2}/profile`, httpOptions);
+    promise.pipe(catchError(this.errorHandler));
     let data = promise.toPromise();
     return data;
   }
+  errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "server error.");
+}
 }

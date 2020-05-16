@@ -7,7 +7,7 @@ export const Students=[{
     "classes_id": 2,
     "student_id": 2,
     "student_name": "Sherline Dmitr",
-    "status": true
+    "status": false
   }, {
     "classes_id": 6,
     "student_id": 3,
@@ -22,27 +22,27 @@ export const Students=[{
     "classes_id": 1,
     "student_id": 5,
     "student_name": "Celine Dymock",
-    "status": true
+    "status": false
   }, {
     "classes_id": 3,
     "student_id": 6,
     "student_name": "Nicola Falco",
-    "status": true
+    "status": false
   }, {
     "classes_id": 2,
     "student_id": 7,
     "student_name": "Oates Corkan",
-    "status": true
+    "status": false
   }, {
     "classes_id": 3,
     "student_id": 8,
     "student_name": "Rawley Spragge",
-    "status": true
+    "status": false
   }, {
     "classes_id": 1,
     "student_id": 9,
     "student_name": "Ram Rangall",
-    "status": true
+    "status": false
   }, {
     "classes_id": 1,
     "student_id": 10,

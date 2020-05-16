@@ -5,18 +5,18 @@
   </ion-fab-button>
 </ion-fab>
 
-<div class="popup-menu">
+<div class="popup-menu" id="hidden">
   <div class="popup-menu-overlay" [ngClass]="{'in': openMenu}"></div>
   <div class="popup-menu-panel" [ngClass]="{'in': openMenu}">
-    <div class="popup-menu-item">
+    <div class="popup-menu-item" (click)='gotoSetting()'>
       <ion-icon name="cog" slot="middle" size="large"></ion-icon>
       <span>Setting</span>
     </div>
-    <div class="popup-menu-item">
-      <ion-icon name="beer" slot="middle" size="large"></ion-icon>
+    <div class="popup-menu-item" (click)='gotoHome()'>
+      <ion-icon name="home" slot="middle" size="large"></ion-icon>
       <span>Home</span>
     </div>
-    <div class="popup-menu-item">
+    <div class="popup-menu-item" (click)='gotoProfile()'>
       <ion-icon name="person" slot="middle" size="large"></ion-icon>
       <span>Profile</span>
     </div>

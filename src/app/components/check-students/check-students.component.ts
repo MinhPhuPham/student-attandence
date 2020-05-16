@@ -33,6 +33,10 @@ export class CheckStudentsComponent implements OnInit {
     })
     
   }
+  selectedAll:boolean;
+  selectall(){
+    this.selectedAll=true;
+  }
 
   Back(){
     this.location.back();
