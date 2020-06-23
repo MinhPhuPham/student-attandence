@@ -19,7 +19,7 @@ export class EditProfilePage implements OnInit {
     
   async ngOnInit() {
     let user:any;
-    user= await this.userservice.getTeachersList();
+    user= await this.userservice.getProfile();
     this.user_data = await user.data;
   }
 

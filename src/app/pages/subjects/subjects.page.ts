@@ -7,7 +7,6 @@ import {
   PopoverController,
   ModalController } from '@ionic/angular';
 import {UserService} from '../../services/user.service';
-import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // Modals
@@ -39,10 +38,15 @@ export class SubjectsPage implements OnInit {
       private user:UserService,
       private router: Router
     ) { }
-    async ngOnInit() {
-      this.listSubjects= Subjects.map((Subjects,i) => Subjects)
-      console.log(this.listSubjects);
-      
+    ngOnInit() {
+      this.getSubject();
+    }
+    async getSubject(){
+      return await this.user.getSubject().then(value => {
+        this.listSubjects = value.data;
+        console.log(this.listSubjects);
+        
+      })
     }
   
     ionViewWillEnter() {
@@ -116,8 +120,8 @@ export class SubjectsPage implements OnInit {
       });
       return await popover.present();
     }
-    GotoClass(subject){
-      this.navCtrl.navigateRoot(['home/subjects/classes/',subject.subject_id]);
+    GotoClass(id){
+      this.navCtrl.navigateRoot(['home/subjects/classes/',id]);
     }
 
 }

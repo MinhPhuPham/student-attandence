@@ -46,16 +46,21 @@ export class AppComponent {
         icon: 'cog'
       }
     ];
-
     this.initializeApp();
-    this.getdata();
+    this.getData();
   }
   
-  async getdata(){
-    let user:any;
-    user= await this.userservice.getTeachersList();
-    return this.user_data = await user.data;
-    
+  
+  async getData(){
+    return this.userservice.getProfile().then(
+      (data: any)=> {
+        this.user_data = data.data
+      }
+    )
+    // console.log(this.userservice.getProfile().then((data: any)=> {
+    //   this.user_data = data.data;
+    //   return this.user_data;
+    // }));
   }
 
   initializeApp() {

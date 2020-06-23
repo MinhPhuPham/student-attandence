@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
+import {UserService} from '../../services/user.service';
 
 import {Classes} from '../../mocks_data/classes';
 @Component({
@@ -10,21 +11,18 @@ import {Classes} from '../../mocks_data/classes';
 export class ClassPage implements OnInit {
   listClasses=[...Classes]
   classes=[];
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute, private userservice: UserService) { }
   
     ngOnInit() {
-      this.route.paramMap.subscribe(params => {
-        let subject_id = parseInt(params.get('subject_id'))
-        this.classes.length=0
-         this.listClasses.filter(classes => {
-           if(classes.subject_id === subject_id){
-             this.classes.push(classes)
-           } 
-           return this.classes;
-        })[0]
+      const id = this.route.snapshot.paramMap.get('subject_id');
+      this.userservice.getClasses(id).then(value => {
+        this.classes = value.data
+        console.log(this.classes);
         
+        return this.classes;
       })
-      console.log(this.classes);
+      
+      
 
     }
 }

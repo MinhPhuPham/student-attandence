@@ -9,8 +9,8 @@
 
 <ion-content *ngIf="classes">
   <ion-list *ngFor="let class of classes">
-    <ion-item [routerLink]="['students/',class.class_id]" >
-      <ion-label>{{class.class_name}}</ion-label>
+    <ion-item [routerLink]="['students/',class._id]" >
+      <ion-label>{{class.name}}</ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
   </ion-list>

@@ -5,6 +5,7 @@ import { Observable, throwError, from } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 import { User } from '../interfaces/users_login';
 import { Subject} from '../interfaces/subject'
+import { promise } from 'protractor';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,6 +28,7 @@ export class UserService {
     public loadingCtrl: LoadingController,
   ) { 
   }
+  loged = false;
 
   isLoading = false;
   async loadingPresent() {
@@ -48,13 +50,16 @@ export class UserService {
     this.isLoading = false;
     return await this.loadingCtrl.dismiss() /*.then(() => console.log('loading dismissed'));*/
   }
+  isLoginIn(): boolean{
+    const token = localStorage.getItem('token');
+    return (token !== null) ? false : true;
+  }
 
   /* Method to login database */
   httpPost(data: User): Observable<User> {
     return this.http.post(`${this.api_url2}/login`, data)
       .pipe(
         map((response: any) => response)
-
       )
       .pipe(catchError(async (err) => {
         console.error(err);
@@ -71,8 +76,26 @@ export class UserService {
       }));
   }
 
+  async getSubject(): Promise<any>{
+    let result = await this.http.get(`${this.api_url2}/subjects`, httpOptions);
+    result.pipe(catchError(this.errorHandler));
+    return result.toPromise();
+  }
 
-  async getTeachersList() {
+  async getClasses(id: string): Promise<any>{
+    let result = await this.http.get(`${this.api_url2}/subjects/${id}/classes`, httpOptions);
+    result.pipe(catchError(this.errorHandler));
+    return result.toPromise();
+  }
+
+  async getStudents(id: string): Promise<any>{
+    let result = await this.http.get(`${this.api_url2}/classes/${id}/students`, httpOptions);
+    result.pipe(catchError(this.errorHandler));
+    return result.toPromise();
+  }
+
+
+  async getProfile() {
     const promise = await this.http.get(`${this.api_url2}/profile`, httpOptions);
     promise.pipe(catchError(this.errorHandler));
     let data = promise.toPromise();
@@ -81,4 +104,5 @@ export class UserService {
   errorHandler(error: HttpErrorResponse) {
     return Observable.throw(error.message || "server error.");
 }
+
 }
