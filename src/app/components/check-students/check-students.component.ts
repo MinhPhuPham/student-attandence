@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 import { Location } from "@angular/common";
 import {Students} from '../../mocks_data/students';
+import * as moment from 'moment';
 
 import {UserService} from '../../services/user.service';
 @Component({
@@ -10,9 +11,11 @@ import {UserService} from '../../services/user.service';
   styleUrls: ['./check-students.component.scss'],
 })
 export class CheckStudentsComponent implements OnInit {
-  listStudents=[...Students];
+  listStudents=[];
   students=[];
   checked = [];
+  student_checked={};
+  class_id;
   constructor(private route: ActivatedRoute, private location:Location, private userservice: UserService) { }
   sliderConfig = {
     // slidesPerView: 1.6,
@@ -36,8 +39,13 @@ export class CheckStudentsComponent implements OnInit {
     // })
     const id = this.route.snapshot.paramMap.get('class_id');
     this.userservice.getStudents(id).then(value => {
-      this.students = value.data;
-      console.log(this.students);
+      console.log(value);
+      this.listStudents = value.data.students;
+      this.class_id = value.data.class_id;
+      this.students = this.listStudents.reduce((obj, student)=>{
+        return {...obj, [student._id]: false}
+      }, {})
+      
       return this.students;
     })
     
@@ -45,22 +53,21 @@ export class CheckStudentsComponent implements OnInit {
   selectedAll:boolean;
   selectall(){
     this.selectedAll = true;
-    this.students.forEach(obj => {
+    this.listStudents.forEach(obj => {
       obj.status = this.selectedAll;
     })
   }
   unselectAll(){
     this.selectedAll= false;
-    this.students.forEach(obj => {
+    this.listStudents.forEach(obj => {
       obj.status = this.selectedAll
     })
   }
   checkedbox(id):boolean{
-
-    if(this.checked.indexOf(id) > -1){
-      return false;
+    if(this.students[id]){
+      return false
     } 
-      return true;
+    return true
   }
 
   arrayRemove(arr, value) {
@@ -68,20 +75,35 @@ export class CheckStudentsComponent implements OnInit {
   }
 
   onChange(id){
-    if(this.checkedbox(id) == true){
-      this.checked.push(id)
-      console.log(this.checked);
-      return this.checked;
-  }else(this.checkedbox(id) == false)
-    {
-      this.checked =  this.arrayRemove(this.checked, id);
-      console.log(this.checked);
-      return this.checked;
-    }
-  }
-
-  onSubmit(){
+    this.students[id]=this.checkedbox(id);
+    console.log(this.students);
     
+  //   if(this.checkedbox(id) == true){
+  //     this.checked.push(id)
+  //     console.log(this.checked);
+  //     return this.checked;
+  // }else(this.checkedbox(id) == false)
+  //   {
+  //     this.checked =  this.arrayRemove(this.checked, id);
+  //     console.log(this.checked);
+  //     return this.checked;
+  //   }
+  }
+  Submit(){
+    let data ={
+      class_id:this.class_id,
+      date: moment().format("DD/MM/YYYY"),
+      students:{
+        ...this.students
+      }
+    }
+    this.userservice.SubmitCheckStudents(data).then(value=>{
+      if(value.status == "OK"){
+        console.log("success");
+          
+      }
+    })
+    console.log(data);
   }
 
 

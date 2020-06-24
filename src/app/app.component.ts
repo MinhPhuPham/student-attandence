@@ -48,13 +48,32 @@ export class AppComponent {
     ];
     this.initializeApp();
     this.getData();
+    // let interval = setInterval(()=> {
+    //   this.getData();
+    //   if(this.getData() == null){
+    //     clearInterval(interval)
+    //   }
+    // },500)
+    
   }
   
+  asyncData(){
+    // console.log(await this.getData());
+    console.log("works");
+    
+    let interval = setInterval(()=> {
+      this.getData();
+      if(this.getData()){
+        clearInterval(interval)
+      }
+    },500)
+  }
   
-  async getData(){
+  getData(){
     return this.userservice.getProfile().then(
       (data: any)=> {
-        this.user_data = data.data
+        this.user_data = data.data;
+        return this.user_data
       }
     )
     // console.log(this.userservice.getProfile().then((data: any)=> {

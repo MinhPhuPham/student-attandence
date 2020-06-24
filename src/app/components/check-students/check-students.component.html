@@ -3,6 +3,9 @@
     <ion-buttons slot="start" (click)="Back()">
       <ion-icon slot="start" name="arrow-back" style="padding-left: 10px;"></ion-icon>
     </ion-buttons>
+    <ion-buttons slot="end" (click)="Submit()">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-buttons>
     <ion-title>Check Students</ion-title>
   </ion-toolbar>
   <ion-toolbar >
@@ -26,7 +29,7 @@
     </ion-tabs>
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="students">
+<ion-content *ngIf="listStudents">
 
   <ion-slides [options]="sliderConfig">
     <ion-slide >
@@ -37,7 +40,7 @@
   </ion-slides>
 
   <ion-card>
-  <ion-list *ngFor="let student of students">
+  <ion-list *ngFor="let student of listStudents">
     <ion-item>
       <ion-avatar slot="start">
         <img src="../../../assets/img/avatar.jpg" alt="ion">

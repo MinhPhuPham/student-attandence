@@ -9,7 +9,8 @@ import { promise } from 'protractor';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
+    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    "Content-Type" : "application/json"
   })
 };
 @Injectable({
@@ -19,7 +20,6 @@ const httpOptions = {
 export class UserService {
   subjects: Array<Subject>
 
-  private api_url = 'http://ec2-18-141-177-210.ap-southeast-1.compute.amazonaws.com:8080'
   private api_url2= 'https://main.musterapis.xyz'
 
   // Constructor
@@ -94,6 +94,11 @@ export class UserService {
     return result.toPromise();
   }
 
+  async SubmitCheckStudents(data): Promise<any>{
+     let result = this.http.post(`${this.api_url2}/story`,data, httpOptions);
+     result.pipe(catchError(this.errorHandler));
+     return result.toPromise();
+  }
 
   async getProfile() {
     const promise = await this.http.get(`${this.api_url2}/profile`, httpOptions);
