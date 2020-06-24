@@ -104,7 +104,7 @@ export class LoginPage implements OnInit {
   }
   
   async Login() {
-    this.user.loadingPresent();
+    this.user.loadingPresent('Welcome to app!!!', true);
     let user = {
       username: this.Email.value,
       password: this.Password.value
@@ -125,16 +125,8 @@ export class LoginPage implements OnInit {
     async ()=>{ 
       await this.navCtrl.navigateRoot('/home');
       console.log('suucess');
-      
-      const toast =  await this.toastCtrl.create({
-        message: 'Welcome to app!!!',
-        duration: 1500, 
-        color: "success",
-        cssClass:"login_success"
-      });
-      this.user.loadingDismiss()
-      toast.present();
-      
+
+      this.user.loadingDismiss()      
     })
 
   }

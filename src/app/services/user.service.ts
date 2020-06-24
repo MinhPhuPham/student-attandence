@@ -31,14 +31,24 @@ export class UserService {
   loged = false;
 
   isLoading = false;
-  async loadingPresent() {
+  async loadingPresent(text?:string, show?: boolean) {
     this.isLoading = true;
     return await this.loadingCtrl.create({
       message: 'Please wait ...',
       spinner: 'circles'
     }).then(a => {
-      a.present().then(() => {
+      a.present().then(async () => {
         console.log('loading presented');
+        const toast = await this.toastCtrl.create({
+          message: text,
+          duration: 1500, 
+          color: "success",
+          cssClass:"login_success"
+        });
+        if(show == false){
+          toast.remove();
+        }
+        toast.present();
         if (!this.isLoading) {
           a.dismiss().then(() => console.log('abort laoding'));
         }

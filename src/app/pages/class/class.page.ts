@@ -15,10 +15,11 @@ export class ClassPage implements OnInit {
   
     ngOnInit() {
       const id = this.route.snapshot.paramMap.get('subject_id');
+      this.userservice.loadingPresent("",false);
       this.userservice.getClasses(id).then(value => {
         this.classes = value.data
         console.log(this.classes);
-        
+        this.userservice.loadingDismiss();
         return this.classes;
       })
       

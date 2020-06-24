@@ -1,22 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
-import {Students} from '../../mocks_data/students';
+import {
+  NavController,
+  AlertController,
+  MenuController,
+  ToastController,
+  PopoverController,
+  ModalController
+} from '@ionic/angular';
 import * as moment from 'moment';
 
-import {UserService} from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-check-students',
   templateUrl: './check-students.component.html',
   styleUrls: ['./check-students.component.scss'],
 })
 export class CheckStudentsComponent implements OnInit {
-  listStudents=[];
-  students=[];
+  listStudents = [];
+  students = [];
   checked = [];
-  student_checked={};
+  student_checked = {};
   class_id;
-  constructor(private route: ActivatedRoute, private location:Location, private userservice: UserService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private userservice: UserService,
+    private _CtrlNav: NavController) { }
   sliderConfig = {
     // slidesPerView: 1.6,
     initialSlide: 1,
@@ -25,48 +36,37 @@ export class CheckStudentsComponent implements OnInit {
     centeredSlides: true
   };
   ngOnInit() {
-    
-    // this.route.paramMap.subscribe(params => {
-    //   let classes_id = parseInt(params.get('class_id'))
-    //   this.students.length=0
-    //    this.listStudents.filter(students => {
-    //      if(students.classes_id === classes_id){
-    //        this.students.push(students)
-    //      } 
-    //      return this.students;
-    //   })[0]
-      
-    // })
+    this.userservice.loadingPresent("", false)
     const id = this.route.snapshot.paramMap.get('class_id');
     this.userservice.getStudents(id).then(value => {
       console.log(value);
       this.listStudents = value.data.students;
       this.class_id = value.data.class_id;
-      this.students = this.listStudents.reduce((obj, student)=>{
-        return {...obj, [student._id]: false}
+      this.students = this.listStudents.reduce((obj, student) => {
+        return { ...obj, [student._id]: false }
       }, {})
-      
+      this.userservice.loadingDismiss();
       return this.students;
     })
-    
+
   }
-  selectedAll:boolean;
-  selectall(){
+  selectedAll: boolean;
+  selectall() {
     this.selectedAll = true;
     this.listStudents.forEach(obj => {
       obj.status = this.selectedAll;
     })
   }
-  unselectAll(){
-    this.selectedAll= false;
+  unselectAll() {
+    this.selectedAll = false;
     this.listStudents.forEach(obj => {
       obj.status = this.selectedAll
     })
   }
-  checkedbox(id):boolean{
-    if(this.students[id]){
+  checkedbox(id): boolean {
+    if (this.students[id]) {
       return false
-    } 
+    }
     return true
   }
 
@@ -74,40 +74,30 @@ export class CheckStudentsComponent implements OnInit {
     return arr.filter(item => item !== value)
   }
 
-  onChange(id){
-    this.students[id]=this.checkedbox(id);
-    console.log(this.students);
-    
-  //   if(this.checkedbox(id) == true){
-  //     this.checked.push(id)
-  //     console.log(this.checked);
-  //     return this.checked;
-  // }else(this.checkedbox(id) == false)
-  //   {
-  //     this.checked =  this.arrayRemove(this.checked, id);
-  //     console.log(this.checked);
-  //     return this.checked;
-  //   }
+  onChange(id) {
+    this.students[id] = this.checkedbox(id);
   }
-  Submit(){
-    let data ={
-      class_id:this.class_id,
+  Submit() {
+    this.userservice.loadingPresent('Success to checked', true);
+    let data = {
+      class_id: this.class_id,
       date: moment().format("DD/MM/YYYY"),
-      students:{
+      students: {
         ...this.students
       }
     }
-    this.userservice.SubmitCheckStudents(data).then(value=>{
-      if(value.status == "OK"){
+    this.userservice.SubmitCheckStudents(data).then(value => {
+      if (value.status == "OK") {
         console.log("success");
-          
+        this.userservice.loadingDismiss();
+        this._CtrlNav.navigateRoot('/home')
       }
     })
     console.log(data);
   }
 
 
-  Back(){
+  Back() {
     this.location.back();
   }
 }

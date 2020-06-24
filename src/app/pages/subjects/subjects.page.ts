@@ -44,8 +44,7 @@ export class SubjectsPage implements OnInit {
     async getSubject(){
       return await this.user.getSubject().then(value => {
         this.listSubjects = value.data;
-        console.log(this.listSubjects);
-        
+        localStorage.setItem('subjects',JSON.stringify(value.data));
       })
     }
   

@@ -10,7 +10,7 @@ export class HomePage implements OnInit {
   listSubjects=[];
   constructor(private router:Router){}
   ngOnInit(){
-    this.listSubjects= Subjects.map((Subjects,i) => Subjects)
+    this.listSubjects= JSON.parse(localStorage.getItem('subjects'));
 
     const token_key = localStorage.getItem('token');
     if(!token_key){
