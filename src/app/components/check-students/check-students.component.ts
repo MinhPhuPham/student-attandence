@@ -96,7 +96,6 @@ export class CheckStudentsComponent implements OnInit {
     console.log(data);
   }
 
-
   Back() {
     this.location.back();
   }

@@ -110,6 +110,13 @@ export class UserService {
      return result.toPromise();
   }
 
+  async getStoriesDay(id: string): Promise<any>{
+    let result = await this.http.get(`${this.api_url2}/classes/${id}/histories`, httpOptions);
+    result.pipe(catchError(this.errorHandler));
+    return result.toPromise();
+  }
+
+
   async getProfile() {
     const promise = await this.http.get(`${this.api_url2}/profile`, httpOptions);
     promise.pipe(catchError(this.errorHandler));

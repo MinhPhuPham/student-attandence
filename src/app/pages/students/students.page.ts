@@ -21,6 +21,7 @@ import { NotificationsComponent } from './../../components/notifications/notific
 export class StudentsPage implements OnInit {
 data;
 searchKey = '';
+listSubjects={};
   yourLocation = '123 Test Street';
   themeCover = 'assets/img/ionic4-Start-Theme-cover.jpg';
   constructor(
@@ -34,6 +35,7 @@ searchKey = '';
   ) { }
   async ngOnInit() {
     this.data=localStorage.getItem('token')
+    this.listSubjects = JSON.parse(localStorage.getItem('subjects'))
   }
 
   ionViewWillEnter() {
@@ -106,5 +108,9 @@ searchKey = '';
       showBackdrop: true
     });
     return await popover.present();
+  }
+
+  GotoClass(id){
+    this.navCtrl.navigateRoot(['home/subjects/classes/',id,"story"]);
   }
 }

@@ -14,16 +14,16 @@
 
 <ion-content padding>
   <ion-item margin-bottom>
-	<ion-checkbox slot="end" [(ngModel)]="isChecked"></ion-checkbox>
+	<ion-checkbox slot="end"></ion-checkbox>
     <ion-label color="primary" stacked>
     	<ion-text color="dark" class="fw500">ID:</ion-text>
     </ion-label>
     <ion-input type="number" style="text-align: center;" placeholder="Put ID of students or subjects"></ion-input>
   </ion-item>
 	<ion-item>
-		<ion-checkbox slot="end" [(ngModel)]="isChecked1"></ion-checkbox>
+		<ion-checkbox slot="end" ></ion-checkbox>
 	  <ion-label class="fw500" color="dark">Nationalities</ion-label>
-	  <ion-select [(ngModel)]="dishnationality" placeholder='Vietnamese' multiple="true">
+	  <ion-select placeholder='Vietnamese' multiple="true">
 	    <ion-select-option>Vietnamese</ion-select-option>
 	    <ion-select-option>Japanese</ion-select-option>
 	    <ion-select-option>Korean</ion-select-option>
@@ -34,12 +34,12 @@
 	</ion-item>
 
 	<ion-item margin-bottom>
-		<ion-checkbox slot="end" [(ngModel)]="isChecked2"></ion-checkbox>
+		<ion-checkbox slot="end" ></ion-checkbox>
 	  <ion-label class="no-margin-bottom">
       <ion-text color="dark" class="fw500">Age:</ion-text>
     </ion-label>
 
-      <ion-range dualKnobs="true" [(ngModel)]="minmaxprice" min="18" max="30" step="1" class="no-padding-top">
+      <ion-range dualKnobs="true" min="18" max="30" step="1" class="no-padding-top">
         <ion-label slot="start"><ion-text color="primary"> {{minmaxprice.lower}}</ion-text></ion-label>
         <ion-label slot="end"><ion-text color="primary">{{minmaxprice.upper}}</ion-text></ion-label>
       </ion-range>

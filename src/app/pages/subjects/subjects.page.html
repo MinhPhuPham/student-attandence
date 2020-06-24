@@ -9,7 +9,7 @@
         </ion-text>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button size="small" shape="round" color="medium" (click)="notifications()">
+      <ion-button size="small" shape="round" color="medium" (click)="notifications($event)">
         <ion-icon name="notifications"></ion-icon>
         <ion-badge color="dark" slot="end">2</ion-badge>
       </ion-button>
@@ -28,7 +28,7 @@
   <ion-list *ngFor="let subject of listSubjects">
     <ion-item (click)="GotoClass(subject._id)">
       <ion-avatar slot="start">
-        <img src="{{subject.subject_img}}" alt="ion">
+        <img src="../../../assets/img/872px-Android_robot.svg.png" alt="ion">
       </ion-avatar>
       <ion-label>
         <h2>{{subject.id}}</h2>

@@ -120,7 +120,7 @@ export class SubjectsPage implements OnInit {
       return await popover.present();
     }
     GotoClass(id){
-      this.navCtrl.navigateRoot(['home/subjects/classes/',id]);
+      this.navCtrl.navigateRoot(['home/subjects/classes/',id,"check"]);
     }
 
 }

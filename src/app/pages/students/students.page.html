@@ -9,7 +9,7 @@
         </ion-text>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button size="small" shape="round" color="medium" (click)="notifications()">
+      <ion-button size="small" shape="round" color="medium" (click)="notifications($event)">
         <ion-icon name="notifications"></ion-icon>
         <ion-badge color="dark" slot="end">2</ion-badge>
       </ion-button>
@@ -24,29 +24,15 @@
   </ion-buttons>
 </ion-toolbar>
 </ion-header>
-
-<ion-content  fullscreen>
-
-  <ion-list >
-    <ion-item>
+<ion-content  fullscreen *ngIf="listSubjects">
+  <ion-list *ngFor="let subject of listSubjects">
+    <ion-item (click)="GotoClass(subject._id)">
       <ion-avatar slot="start">
-        <img src="../../../assets/img/letter-s-logo.png" alt="ion">
+        <img src="../../../assets/img/872px-Android_robot.svg.png" alt="ion">
       </ion-avatar>
       <ion-label>
-        <h2>Student 1</h2>
-        <h3>I can handle myself</h3>
-        <p>You will remove these restraints and leave...</p>
-      </ion-label>
-      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../../assets/img/angular-icon.svg" alt="ion">
-      </ion-avatar>
-      <ion-label>
-        <h2>Student 2</h2>
-        <h3>I can handle myself</h3>
+        <h2>{{subject.id}}</h2>
+        <h3>{{subject.name}}</h3>
         <p>You will remove these restraints and leave...</p>
       </ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>

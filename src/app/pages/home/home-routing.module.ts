@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import {CheckStudentsComponent} from '../../components/check-students/check-students.component'
+import { CheckStudentsComponent } from '../../components/check-students/check-students.component'
 const routes: Routes = [
   {
     path: '',
@@ -11,38 +11,49 @@ const routes: Routes = [
 
       {
         path: 'students',
-        loadChildren: () => import('../../pages/students/students.module').then( m => m.StudentsPageModule),
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../../pages/students/students.module').then(m => m.StudentsPageModule),
+          },
+          {
+            path: 'histories',
+            loadChildren: () => import('../../pages/histories/histories.module').then(m => m.HistoriesPageModule)
+          }
+        ]
+
 
       },
 
       {
         path: 'subjects',
-        children:[
+        children: [
           {
-            path:'',
-            loadChildren: () => import('../../pages/subjects/subjects.module').then( m => m.SubjectsPageModule),
+            path: '',
+            loadChildren: () => import('../../pages/subjects/subjects.module').then(m => m.SubjectsPageModule),
           },
           {
-            path: 'classes/:subject_id',
-            children:[
+            path: 'classes/:subject_id/:istype',
+            children: [
               {
-                path:'',
-                loadChildren: () => import('../../pages/class/class.module').then( m => m.ClassPageModule)
+                path: '',
+                loadChildren: () => import('../../pages/class/class.module').then(m => m.ClassPageModule)
               },
               {
-                path:'students/:class_id',
-                component:CheckStudentsComponent
+                path: 'students/:class_id',
+                component: CheckStudentsComponent
               }
             ]
-            
+
           }
         ]
-        
-        
+
+
       },
-      {path:'',
-      redirectTo:'subjects',
-      pathMatch: "full"
+      {
+        path: '',
+        redirectTo: 'subjects',
+        pathMatch: "full"
       }
     ]
   },
