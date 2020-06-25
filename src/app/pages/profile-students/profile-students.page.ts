@@ -14,6 +14,7 @@ export class ProfileStudentsPage implements OnInit {
   Profile;
   Stories;
   Summary;
+  ClassName;
   progressvalue: Number;
   constructor(
     private location: Location,
@@ -30,6 +31,7 @@ export class ProfileStudentsPage implements OnInit {
       this.Profile = value.data.profile;
       this.Stories = value.data.stories;
       this.Summary = value.data.summary;
+      this.ClassName = value.data.class_name;
       this.progressvalue = (this.Summary.attend/(this.Summary.attend + this.Summary.absent))*100
       this.userservice.loadingDismiss();
     })

@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 
 // Modals
 import { SearchFilterPage } from '../../pages/modal/search-filter/search-filter.page';
+
 import { ImagePage } from './../modal/image/image.page';
+
 // Call notifications test by Popover and Custom Component.
 import { NotificationsComponent } from './../../components/notifications/notifications.component';
-
-import {Subjects} from '../../../assets/mocks_data/subjects'
 
 @Component({
   selector: 'app-subjects',
@@ -25,7 +25,7 @@ import {Subjects} from '../../../assets/mocks_data/subjects'
 export class SubjectsPage implements OnInit {
   data;
   listSubjects=[];
-  searchKey = '';
+  term = '';
     yourLocation = '123 Test Street';
     themeCover = 'assets/img/ionic4-Start-Theme-cover.jpg';
     constructor(

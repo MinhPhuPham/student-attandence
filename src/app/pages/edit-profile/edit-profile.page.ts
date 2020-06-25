@@ -39,7 +39,7 @@ export class EditProfilePage implements OnInit {
       });
 
       toast.present();
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateForward('/dashbroad');
     });
   }
 

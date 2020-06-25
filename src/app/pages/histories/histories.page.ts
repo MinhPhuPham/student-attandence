@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HistoriesPage implements OnInit {
 ListDate=[];
+term= '';
   constructor(
     private location: Location,
     private userservice: UserService,
@@ -19,8 +20,7 @@ ListDate=[];
     const id = this.route.snapshot.paramMap.get('class_id');
     this.userservice.loadingPresent("", false);
     this.userservice.getStoriesDay(id).then(value => {
-      this.ListDate = value.data
-      console.log(this.ListDate);
+      this.ListDate = value.data;
       this.userservice.loadingDismiss();
       return this.ListDate;
     })

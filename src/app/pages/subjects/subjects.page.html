@@ -16,7 +16,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="dark">
-  <ion-searchbar [(ngModel)]="searchKey"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="term"></ion-searchbar>
   <ion-buttons slot="end">
     <ion-button size="small" shape="round" color="medium" (click)="searchFilter()">
       <ion-icon name="options"></ion-icon>
@@ -24,9 +24,9 @@
   </ion-buttons>
 </ion-toolbar>
 </ion-header>
-<ion-content  fullscreen *ngIf="listSubjects">
-  <ion-list *ngFor="let subject of listSubjects">
-    <ion-item (click)="GotoClass(subject._id,subject.id)">
+<ion-content fullscreen *ngIf="listSubjects">
+  <ion-list>
+    <ion-item *ngFor="let subject of listSubjects | filter:term" (click)="GotoClass(subject._id,subject.id)">
       <ion-avatar slot="start">
         <img src="../../../assets/img/872px-Android_robot.svg.png" alt="ion">
       </ion-avatar>

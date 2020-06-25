@@ -21,10 +21,8 @@ export class ListStudentsHisPage implements OnInit {
     this.userservice.loadingPresent("", false);
     this.userservice.getHistoriesListStudent(subject_id,decodeURIComponent(day)).then(value =>{
       this.listStudents= value.data;
-      console.log(this.listStudents);
       this.userservice.loadingDismiss();
     })
-    console.log(decodeURIComponent(day));
     
   }
   Back() {

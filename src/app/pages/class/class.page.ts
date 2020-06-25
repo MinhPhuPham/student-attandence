@@ -22,8 +22,7 @@ export class ClassPage implements OnInit {
     this.checkType(checktype);
     this.userservice.loadingPresent("", false);
     this.userservice.getClasses(id).then(value => {
-      this.classes = value.data
-      console.log(this.classes);
+      this.classes = value.data;
       this.userservice.loadingDismiss();
       return this.classes;
     })

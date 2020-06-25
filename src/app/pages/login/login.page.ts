@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   ) {
     const tokey_key = localStorage.getItem('token');
     if(tokey_key){
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashbroad']);
     }
   }
 

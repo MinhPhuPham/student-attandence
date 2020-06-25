@@ -68,12 +68,27 @@
       <ion-card *ngFor="let story of Stories">
         <ion-card-header>
           <ion-card-subtitle>{{story.date}}</ion-card-subtitle>
-          <ion-card-title>Class name</ion-card-title>
+          <ion-card-title class="ion-text-center" *ngIf="ClassName">{{ClassName}}</ion-card-title>
         </ion-card-header>
         
-        <ion-card-content>
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
+        <ion-card-content class="fix-content ion-text-center">
+          <div class="content-student">
+            <ion-list lines="none">
+            <ion-item>
+              <ion-label slot="start">
+                Status: 
+              </ion-label>
+              <ion-label>
+                {{story.attend ? 'Attend':'Absent'}}
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="story.note">
+              <ion-label>
+                Note: {{story.note}}
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          </div>
         </ion-card-content>
       </ion-card>
     </ion-list>
@@ -112,7 +127,7 @@
       <ion-item>
         <div class="progress-wrapper">
           <div class="progress-bar" [style.width]="progressvalue + '%'">
-            {{progressvalue}}%
+            {{progressvalue.toFixed(2)}}%
           </div>
         </div>
       </ion-item>

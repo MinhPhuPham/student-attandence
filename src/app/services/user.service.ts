@@ -38,7 +38,6 @@ export class UserService {
       spinner: 'circles'
     }).then(a => {
       a.present().then(async () => {
-        console.log('loading presented');
         const toast = await this.toastCtrl.create({
           message: text,
           duration: 1500, 
