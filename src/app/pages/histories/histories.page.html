@@ -1,9 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>histories</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="Back()">
+      <ion-icon slot="start" name="arrow-back" style="padding-left: 10px;"></ion-icon>
+    </ion-buttons>
+    <ion-title style="text-align: center;margin-left: -35px;">
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">List Date</ion-text>
+        </ion-text>
+    </ion-title>
   </ion-toolbar>
+  <ion-toolbar color="dark">
+  <ion-searchbar></ion-searchbar>
+</ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+<ion-content  fullscreen>
+  <ion-list *ngFor="let day of ListDate">
+    <ion-item [routerLink]="['histories_students/',day]">
+      <ion-label>
+        <h2>{{day}}</h2>
+      </ion-label>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+  
 </ion-content>

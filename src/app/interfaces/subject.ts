@@ -1,5 +1,7 @@
 export type Subject ={
-    subject_id: Number,
-    subject_name:  String,
-    subject_img:String,
+    _id: String,
+    id:  String,
+    name:String,
+    created_at: Number,
+    updated_at: Number
 }
