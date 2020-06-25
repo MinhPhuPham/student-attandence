@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="Back()">
+      <ion-icon slot="start" name="arrow-back" style="padding-left: 10px;"></ion-icon>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Story</ion-text>
+        </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-badge color="dark" slot="end">2</ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+  <ion-searchbar></ion-searchbar>
+  <ion-buttons slot="end">
+    <!-- (click)="searchFilter()" -->
+    <ion-button size="small" shape="round" color="medium">
+      <ion-icon name="options"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngFor="let student of listStudents">
+    <ion-item [routerLink]="['profile-students/',student.student_id]" >
+      <ion-avatar slot="start">
+        <img src="../../../assets/img/avatar.jpg" alt="ion">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{student.name}}</h2>
+        <h3>{{student.phone}}</h3>
+        <p>{{student.email}}</p>
+      </ion-label>
+      <ion-icon *ngIf="student.attend" name="checkmark-circle-outline" slot="end" style="color: rgb(12, 170, 12)"></ion-icon>
+      <ion-icon *ngIf="!student.attend" name="close-circle-outline"  slot="end" style="color: rgb(165, 3, 3);"></ion-icon>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

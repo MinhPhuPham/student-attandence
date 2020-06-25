@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { Observable, throwError, from } from 'rxjs';
-import { catchError, retry, map } from 'rxjs/operators';
+import { Observable,BehaviorSubject,  throwError, from } from 'rxjs';
+import { catchError, retry, map, tap } from 'rxjs/operators';
 import { User } from '../interfaces/users_login';
 import { Subject} from '../interfaces/subject'
-import { promise } from 'protractor';
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -18,17 +16,19 @@ const httpOptions = {
 })
 
 export class UserService {
-  subjects: Array<Subject>
+  private currentSubject: BehaviorSubject<Subject>;
+  public subjects: Observable<Subject>;
 
-  private api_url2= 'https://main.musterapis.xyz'
+  private api_url2= 'https://main.musterapis.xyz';
 
   // Constructor
   constructor(private http: HttpClient,
     private toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
   ) { 
+    this.currentSubject = new BehaviorSubject<Subject>(JSON.parse(localStorage.getItem('subjects')));
+    this.subjects = this.currentSubject.asObservable();
   }
-  loged = false;
 
   isLoading = false;
   async loadingPresent(text?:string, show?: boolean) {
@@ -69,7 +69,10 @@ export class UserService {
   httpPost(data: User): Observable<User> {
     return this.http.post(`${this.api_url2}/login`, data)
       .pipe(
-        map((response: any) => response)
+        tap((data: any)=> {localStorage.setItem('token',data.data.token);
+      console.log(data.data.token);
+      }
+        )
       )
       .pipe(catchError(async (err) => {
         console.error(err);
@@ -86,42 +89,69 @@ export class UserService {
       }));
   }
 
-  async getSubject(): Promise<any>{
-    let result = await this.http.get(`${this.api_url2}/subjects`, httpOptions);
+  get Subject(): Subject{
+    return this.currentSubject.value;
+  }
+
+  getSubject(){
+    let headers = new  HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    return this.http.get<any>(`${this.api_url2}/subjects`, {headers: headers})
+               .pipe(map(subject=>{
+                localStorage.setItem('subjects', JSON.stringify(subject.data))
+                this.currentSubject.next(subject.data);
+                return subject.data;
+               }))
+  }
+
+   getClasses(id: string): Promise<any>{
+    let headers = new  HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    let result =  this.http.get(`${this.api_url2}/subjects/${id}/classes`, {headers: headers});
     result.pipe(catchError(this.errorHandler));
     return result.toPromise();
   }
 
-  async getClasses(id: string): Promise<any>{
-    let result = await this.http.get(`${this.api_url2}/subjects/${id}/classes`, httpOptions);
+   getStudents(id: string): Promise<any>{
+    let headers = new  HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    let result =  this.http.get(`${this.api_url2}/classes/${id}/students`, {headers: headers});
     result.pipe(catchError(this.errorHandler));
     return result.toPromise();
   }
 
-  async getStudents(id: string): Promise<any>{
-    let result = await this.http.get(`${this.api_url2}/classes/${id}/students`, httpOptions);
-    result.pipe(catchError(this.errorHandler));
-    return result.toPromise();
-  }
-
-  async SubmitCheckStudents(data): Promise<any>{
-     let result = this.http.post(`${this.api_url2}/story`,data, httpOptions);
+   SubmitCheckStudents(data): Promise<any>{
+    let headers = new  HttpHeaders();
+    headers = headers.set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    headers = headers.set("Content-Type", "application/json");
+     let result = this.http.post(`${this.api_url2}/story`,data, {headers: headers});
      result.pipe(catchError(this.errorHandler));
      return result.toPromise();
   }
 
-  async getStoriesDay(id: string): Promise<any>{
-    let result = await this.http.get(`${this.api_url2}/classes/${id}/histories`, httpOptions);
+   getStoriesDay(id: string): Promise<any>{
+    let headers = new  HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    let result = this.http.get(`${this.api_url2}/classes/${id}/histories`, {headers: headers});
     result.pipe(catchError(this.errorHandler));
     return result.toPromise();
   }
 
+   getHistoriesListStudent(id,day): Promise<any>{
+    let headers = new  HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    let result = this.http.get(`${this.api_url2}/classes/${id}/stories?date=${day}`,{headers: headers});
+    result.pipe(catchError(this.errorHandler));
+    return result.toPromise();
+  }
 
-  async getProfile() {
-    const promise = await this.http.get(`${this.api_url2}/profile`, httpOptions);
+  getProfileStudent(class_id,student_id): Promise<any>{
+    let headers = new  HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    let result = this.http.get(`${this.api_url2}/classes/${class_id}/stories/students/${student_id} `,{headers: headers});
+    result.pipe(catchError(this.errorHandler));
+    return result.toPromise();
+  }
+
+   getProfile() {
+    let headers = new  HttpHeaders().set("Authorization", `Bearer ${localStorage.getItem('token')}`);
+    const promise = this.http.get(`${this.api_url2}/profile`, {headers: headers});
     promise.pipe(catchError(this.errorHandler));
-    let data = promise.toPromise();
-    return data;
+    return promise.toPromise();
   }
   errorHandler(error: HttpErrorResponse) {
     return Observable.throw(error.message || "server error.");

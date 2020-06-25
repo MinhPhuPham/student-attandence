@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { async } from '@angular/core/testing';
+import {AppComponent} from "../../app.component"
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,6 +20,7 @@ export class LoginPage implements OnInit {
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private user: UserService,
+    private compoent: AppComponent,
     private router: Router
   ) {
     const tokey_key = localStorage.getItem('token');
@@ -113,19 +115,16 @@ export class LoginPage implements OnInit {
       username: 'tamtotran5667@gmail.com',
       password: 'myPassword'
     }
-    this.user.httpPost(user2).subscribe((res:any)=>{
-      let data =res.data
-      localStorage.setItem('token',data.token)
+    this.user.httpPost(user2).subscribe(async (res:any)=>{
+      let data = await res.data
+       localStorage.setItem('token',data.token)
     },
-    
     error =>{
       console.log(error);
-      
     },
-    async ()=>{ 
-      await this.navCtrl.navigateRoot('/home');
-      console.log('suucess');
-
+    ()=>{
+      this.compoent.isCall = true; 
+      this.navCtrl.navigateRoot('/home');
       this.user.loadingDismiss()      
     })
 

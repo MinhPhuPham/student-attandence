@@ -11,6 +11,7 @@ import {UserService} from '../../services/user.service'
 // Modals
 import { SearchFilterPage } from '../../pages/modal/search-filter/search-filter.page';
 import { ImagePage } from './../modal/image/image.page';
+import {Subject} from "../../interfaces/subject";
 // Call notifications test by Popover and Custom Component.
 import { NotificationsComponent } from './../../components/notifications/notifications.component';
 @Component({
@@ -21,7 +22,7 @@ import { NotificationsComponent } from './../../components/notifications/notific
 export class StudentsPage implements OnInit {
 data;
 searchKey = '';
-listSubjects={};
+listSubjects: Subject;
   yourLocation = '123 Test Street';
   themeCover = 'assets/img/ionic4-Start-Theme-cover.jpg';
   constructor(
@@ -35,7 +36,10 @@ listSubjects={};
   ) { }
   async ngOnInit() {
     this.data=localStorage.getItem('token')
-    this.listSubjects = JSON.parse(localStorage.getItem('subjects'))
+    this.user.subjects.subscribe(value => this.listSubjects =value)
+    console.log("Start in time");
+    
+    
   }
 
   ionViewWillEnter() {

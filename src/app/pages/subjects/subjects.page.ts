@@ -39,13 +39,11 @@ export class SubjectsPage implements OnInit {
       private router: Router
     ) { }
     ngOnInit() {
-      this.getSubject();
-    }
-    async getSubject(){
-      return await this.user.getSubject().then(value => {
-        this.listSubjects = value.data;
-        localStorage.setItem('subjects',JSON.stringify(value.data));
-      })
+      this.user.loadingPresent("", false);
+      this.user.getSubject().subscribe(data => {
+        this.listSubjects = data,
+        this.user.loadingDismiss();
+      })   
     }
   
     ionViewWillEnter() {
@@ -119,7 +117,8 @@ export class SubjectsPage implements OnInit {
       });
       return await popover.present();
     }
-    GotoClass(id){
+    GotoClass(id, name){
+      localStorage.setItem('name_subjects',name);
       this.navCtrl.navigateRoot(['home/subjects/classes/',id,"check"]);
     }
 
