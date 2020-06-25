@@ -14,7 +14,7 @@ import { Pages } from './interfaces/pages';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  isCall= false;
   public appPages: Array<Pages>;
   user_data
   constructor(
@@ -47,25 +47,34 @@ export class AppComponent {
       }
     ];
     this.initializeApp();
-    this.getData();
-    
+    let token = localStorage.getItem('token');
+    if(this.isCall== true || token){
+      this.getData()
+    }
+    // this.asyncData();
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
   }
   
   asyncData(){
+    let token = localStorage.getItem('token');
     
     let interval = setInterval(()=> {
-      this.getData();
-      if(this.getData()){
-        clearInterval(interval)
+      this.getToken();
+      if(token){
+        this.getData().then(()=> clearInterval(interval))
       }
     },500)
   }
   
   getData(){
+    
     return this.userservice.getProfile().then(
       (data: any)=> {
         this.user_data = data.data;
-        return this.user_data
+        return this.user_data;
       }
     )
   }
@@ -82,7 +91,7 @@ export class AppComponent {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.router.navigate(['/']);
   }
 }
