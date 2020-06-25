@@ -1,12 +1,11 @@
 <popmenu></popmenu>
-<ion-tabs *ngIf="listSubjects">
+<ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="subjects">
+    <ion-tab-button tab="subjects" class="fix-btn">
       <ion-icon name="calendar"></ion-icon>
       <ion-label>Subjects</ion-label>
-      <ion-badge>{{listSubjects.length}}</ion-badge>
     </ion-tab-button>
-    <ion-tab-button style="border-left: 1px solid rgb(218, 206, 206);" tab="students">
+    <ion-tab-button class="fix-btn" tab="students">
       <ion-icon name="person-circle"></ion-icon>
       <ion-label>Stories</ion-label>
     </ion-tab-button>

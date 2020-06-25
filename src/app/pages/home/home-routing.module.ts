@@ -17,8 +17,28 @@ const routes: Routes = [
             loadChildren: () => import('../../pages/students/students.module').then(m => m.StudentsPageModule),
           },
           {
-            path: 'histories',
-            loadChildren: () => import('../../pages/histories/histories.module').then(m => m.HistoriesPageModule)
+            path: ':class_id/histories',
+            children:[
+              {
+                path: '',
+                loadChildren: () => import('../../pages/histories/histories.module').then(m => m.HistoriesPageModule)
+              },
+              {
+                path: 'histories_students/:day',
+                children:[
+                  {
+                    path: '',
+                    loadChildren: () => import('../../pages/list-students-his/list-students-his.module').then( m => m.ListStudentsHisPageModule)
+                  },
+                  {
+                    path: 'profile-students/:student_id',
+                    loadChildren: () => import('../../pages/profile-students/profile-students.module').then( m => m.ProfileStudentsPageModule)
+                  }
+                ]
+              },
+
+            ]
+            
           }
         ]
 
@@ -43,6 +63,7 @@ const routes: Routes = [
                 path: 'students/:class_id',
                 component: CheckStudentsComponent
               }
+              
             ]
 
           }
