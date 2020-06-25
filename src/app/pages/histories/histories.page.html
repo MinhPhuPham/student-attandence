@@ -9,6 +9,21 @@
         </ion-text>
     </ion-title>
   </ion-toolbar>
+  <ion-toolbar >
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button class="margin">
+          <ion-icon name="people-circle"></ion-icon>
+          <ion-label>{{class_name}}</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button class="margin">
+          <ion-icon name="podium"></ion-icon>
+          <ion-label>{{subject_name}}</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
   <ion-toolbar color="dark">
   <ion-searchbar [(ngModel)]="term"></ion-searchbar>
 </ion-toolbar>

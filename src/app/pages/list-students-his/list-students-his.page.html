@@ -15,8 +15,28 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar >
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button style="border-right:.5px solid  rgb(218, 206, 206); ;" >
+          <ion-icon name="people-circle"></ion-icon>
+          <ion-label>{{class_name}}</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button >
+          <ion-icon name="podium"></ion-icon>
+          <ion-label>{{subject_name}}</ion-label>
+        </ion-tab-button>
+    
+        <ion-tab-button  style="border-left: 1px solid rgb(218, 206, 206);" >
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>{{day}}</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
   <ion-toolbar color="dark">
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar [(ngModel)]="term"></ion-searchbar>
   <ion-buttons slot="end">
     <!-- (click)="searchFilter()" -->
     <ion-button size="small" shape="round" color="medium">
@@ -26,8 +46,8 @@
 </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list *ngFor="let student of listStudents">
-    <ion-item [routerLink]="['profile-students/',student.student_id]" >
+  <ion-list>
+    <ion-item  *ngFor="let student of listStudents | filter:term" [routerLink]="['profile-students/',student.student_id]" >
       <ion-avatar slot="start">
         <img src="../../../assets/img/avatar.jpg" alt="ion">
       </ion-avatar>

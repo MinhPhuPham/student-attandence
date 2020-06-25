@@ -114,7 +114,8 @@ listSubjects: Subject;
     return await popover.present();
   }
 
-  GotoClass(id){
+  GotoClass(id, name){
+    localStorage.setItem('subjects_story',name);
     this.navCtrl.navigateRoot(['dashbroad/home/subjects/classes/',id,"story"]);
   }
 }

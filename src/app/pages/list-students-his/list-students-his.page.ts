@@ -9,6 +9,10 @@ import {UserService} from '../../services/user.service';
 })
 export class ListStudentsHisPage implements OnInit {
   listStudents;
+  term;
+  day;
+  subject_name;
+  class_name='';
   constructor(
     private location: Location,
     private route: ActivatedRoute,
@@ -17,6 +21,9 @@ export class ListStudentsHisPage implements OnInit {
 
   ngOnInit() {
     const day = this.route.snapshot.paramMap.get('day');
+    this.day = day;
+    this.subject_name = localStorage.getItem('subjects_story');
+    this.class_name = localStorage.getItem('class_name');
     const subject_id = this.route.snapshot.paramMap.get('class_id');
     this.userservice.loadingPresent("", false);
     this.userservice.getHistoriesListStudent(subject_id,decodeURIComponent(day)).then(value =>{

@@ -75,16 +75,16 @@
           <div class="content-student">
             <ion-list lines="none">
             <ion-item>
-              <ion-label slot="start">
-                Status: 
-              </ion-label>
               <ion-label>
-                {{story.attend ? 'Attend':'Absent'}}
+                Status: <span style="color: rgb(138, 43, 226); font-weight: 450; padding-left: 30px;">{{story.attend ? 'Attend':'Absent'}}</span> 
+              </ion-label>
+              <ion-label style="color: rgb(138, 43, 226); font-weight: 450;">
+                
               </ion-label>
             </ion-item>
             <ion-item *ngIf="story.note">
               <ion-label>
-                Note: {{story.note}}
+                Note: <span style="color: rgb(138, 43, 226); font-weight: 450; padding-left: 41px;">{{story.note}}</span> 
               </ion-label>
             </ion-item>
           </ion-list>
