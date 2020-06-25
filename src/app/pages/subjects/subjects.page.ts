@@ -119,7 +119,7 @@ export class SubjectsPage implements OnInit {
     }
     GotoClass(id, name){
       localStorage.setItem('name_subjects',name);
-      this.navCtrl.navigateRoot(['home/subjects/classes/',id,"check"]);
+      this.navCtrl.navigateRoot(['dashbroad/home/subjects/classes/',id,"check"]);
     }
 
 }

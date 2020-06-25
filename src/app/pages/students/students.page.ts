@@ -115,6 +115,6 @@ listSubjects: Subject;
   }
 
   GotoClass(id){
-    this.navCtrl.navigateRoot(['home/subjects/classes/',id,"story"]);
+    this.navCtrl.navigateRoot(['dashbroad/home/subjects/classes/',id,"story"]);
   }
 }

@@ -33,7 +33,7 @@ export class ClassPage implements OnInit {
   }
   RedictStory(id, name){
     localStorage.setItem('class_name', name);
-    this.navCtrl.navigateRoot([`home/students/${id}/histories`]);
+    this.navCtrl.navigateRoot([`dashbroad/home/students/${id}/histories`]);
   }
   checkType(type) {
     if (type == "check") {

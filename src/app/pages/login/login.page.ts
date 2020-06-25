@@ -123,8 +123,7 @@ export class LoginPage implements OnInit {
       console.log(error);
     },
     ()=>{
-      this.compoent.isCall = true; 
-      this.navCtrl.navigateRoot('/home');
+      this.navCtrl.navigateRoot('/dashbroad');
       this.user.loadingDismiss()      
     })
 

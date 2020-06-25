@@ -97,7 +97,7 @@ export class CheckStudentsComponent implements OnInit {
       if (value.status == "OK") {
         console.log("success");
         this.userservice.loadingDismiss();
-        this._CtrlNav.navigateRoot('/home')
+        this._CtrlNav.navigateRoot('/dashbroad')
       }
     })
     console.log(data);
