@@ -15,16 +15,16 @@ export class PopmenuComponent implements OnInit {
   ngOnInit() {
   }
   gotoSetting() {
-    this.navCtrl.navigateRoot('/settings')
+    this.navCtrl.navigateRoot('/dashbroad/settings')
 
     return this.openMenu = false;
   }
   gotoHome() {
-    this.router.navigate['/home'];
+    this.router.navigate['/dashbroad'];
     return this.openMenu = false;
   }
   gotoProfile() {
-    this.router.navigate(['/edit-profile']);
+    this.router.navigate(['/dashbroad/edit-profile']);
     return this.openMenu = false;
   }
   Function(event) {

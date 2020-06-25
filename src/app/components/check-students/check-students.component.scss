@@ -1,3 +1,5 @@
-:host(.tab-layout-icon-top) ::slotted(ion-icon) {
-    margin-top: 0px !important;
+:host{
+    .button-solid{
+        --background: rgb(29, 119, 230);
+    }
 }

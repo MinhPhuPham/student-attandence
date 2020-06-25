@@ -17,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ImagePageModule } from './pages/modal/image/image.module';
 import { SearchFilterPageModule } from './pages/modal/search-filter/search-filter.module';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 // Components
 import { NotificationsComponent } from './components/notifications/notifications.component';
 
@@ -28,6 +30,7 @@ import { NotificationsComponent } from './components/notifications/notifications
     AppRoutingModule,
     HttpClientModule,
     ImagePageModule,
+    Ng2SearchPipeModule,
     SearchFilterPageModule,
   ],
   entryComponents: [NotificationsComponent],
