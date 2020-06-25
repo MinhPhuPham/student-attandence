@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'class',
     loadChildren: () => import('./pages/class/class.module').then( m => m.ClassPageModule)
+  },
+  {
+    path: 'root-layout',
+    loadChildren: () => import('./pages/root-layout/root-layout.module').then( m => m.RootLayoutPageModule)
   }
 ];
 
