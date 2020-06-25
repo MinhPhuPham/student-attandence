@@ -87,7 +87,7 @@ export class RootLayoutPage {
   }
 
   goToEditProgile() {
-    this.navCtrl.navigateForward('edit-profile');
+    this.navCtrl.navigateForward('/dashbroad/edit-profile');
   }
 
   logout() {

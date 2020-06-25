@@ -41,6 +41,14 @@
         </p>
     </form>
 
+
+    <div>
+      <ion-button icon-left size="medium" class="btn-sign" expand="full" shape="round" color="dark" (click)="Login()" [disabled]="!onLoginForm.valid" tappable>
+        <ion-icon name="log-in"></ion-icon>
+        Signin
+      </ion-button>
+    </div>
+
     <p style="text-align: center;padding-top: 20px;" tappable (click)="forgotPass()" class="paz">
       <ion-text color="light">
         <strong>Forgot Password?</strong>
