@@ -21,6 +21,9 @@ export class CheckStudentsComponent implements OnInit {
   listStudents = [];
   students = [];
   checked = [];
+  subject_name;
+  class_name;
+  date = moment().format("DD/MM/YYYY");
   student_checked = {};
   class_id;
   constructor(
@@ -36,7 +39,11 @@ export class CheckStudentsComponent implements OnInit {
     centeredSlides: true
   };
   ngOnInit() {
-    this.userservice.loadingPresent("", false)
+    this.userservice.loadingPresent("", false);
+    
+    this.subject_name = localStorage.getItem('name_subjects');
+    this.class_name = localStorage.getItem('class_name')
+
     const id = this.route.snapshot.paramMap.get('class_id');
     this.userservice.getStudents(id).then(value => {
       console.log(value);
