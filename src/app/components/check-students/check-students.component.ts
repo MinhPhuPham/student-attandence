@@ -126,6 +126,7 @@ export class CheckStudentsComponent implements OnInit {
 
   Submit() {
     this.userservice.loadingPresent('Success to checked', true);
+    localStorage.setItem('class_id_checked', this.class_id);
     let data = {
       class_id: this.class_id,
       date: moment().format("DD/MM/YYYY"),

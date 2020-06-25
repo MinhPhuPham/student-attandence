@@ -13,7 +13,7 @@
 
 <ion-content *ngIf="classes">
   <ion-list *ngFor="let class of classes">
-    <ion-item *ngIf="isCheck" [routerLink]="['students/',class._id]" (click)="SaveClassName(class.name)">
+    <ion-item *ngIf="isCheck" (click)="SaveClassName(class.name)" [routerLink]="['students/',class._id]">
       <ion-label>{{class.name}}</ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>

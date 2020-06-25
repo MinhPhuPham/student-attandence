@@ -111,11 +111,7 @@ export class LoginPage implements OnInit {
       username: this.Email.value,
       password: this.Password.value
     }
-    let user2={
-      username: 'tamtotran5667@gmail.com',
-      password: 'myPassword'
-    }
-    this.user.httpPost(user2).subscribe(async (res:any)=>{
+    this.user.httpPost(user).subscribe(async (res:any)=>{
       let data = await res.data
        localStorage.setItem('token',data.token)
     },
