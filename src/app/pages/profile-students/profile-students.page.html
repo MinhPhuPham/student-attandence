@@ -1,59 +1,121 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" ></ion-back-button>
+    <ion-buttons slot="start" (click)="Back()">
+      <ion-icon slot="start" name="arrow-back" style="padding-left: 10px;"></ion-icon>
     </ion-buttons>
-    <ion-title>Student Profile</ion-title>
+    <ion-title style="text-align: center;">
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">Student Profile</ion-text>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end" (click)="callNow(Profile.phone)">
+      <ion-icon slot="start" name="call"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="profile">
-  <ion-card no-margin>
+  <ion-card no-margin *ngIf="Profile">
     <ion-card-content class="bg-profile">
       <img src="assets/img/avatar.jpg">
-      <h1 class="fw500">User Name</h1>
-      <h2 color="light" margin-bottom style="padding-top:5px;margin-bottom: -5px !important;">USer email</h2>
+      <h1 class="fw500">{{Profile.first_name}}</h1>
+      <h2 color="light" margin-bottom style="padding-top:5px;margin-bottom: -5px !important;">{{Profile.email}}</h2>
     </ion-card-content>
-  
-    <ion-grid fixed no-padding>
-      <ion-row>
-        <ion-col size="12" padding>
+  </ion-card>
+  <ion-card *ngIf="Profile">
+    <ion-list margin-bottom>
+      <ion-list-header color="light">
+        <ion-label class="fw700" style="text-align: center;">Information of <span
+            style="color: rgb(236, 124, 43);">Student</span></ion-label>
+      </ion-list-header>
 
-          <ion-list margin-bottom>
-            <ion-list-header color="light">
-              <ion-label class="fw700" style="text-align: center;">Information of <span style="color: rgb(236, 124, 43);">Student</span></ion-label>
-            </ion-list-header>
+      <ion-item>
+        <ion-icon name="person-circle" slot="start"></ion-icon>
+        <ion-label> {{Profile.name}}</ion-label>
+      </ion-item>
 
-            <ion-item>
-              <ion-label color="dark" position="stacked">Full Name:</ion-label>
-              <!-- <ion-input inputmode="text" placeholder="Ex: Jable Johnson" value="{{user_data.name}}" ></ion-input> -->
-            </ion-item>
+      <ion-item>
+        <ion-icon name="leaf-sharp" slot="start"></ion-icon>
+        <ion-label color="dark"> {{Profile.major}}</ion-label>
+      </ion-item>
 
-            <ion-item>
-              <ion-label color="dark" position="stacked">Birth Day:</ion-label>
-              <!-- <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"value="{{user_data.birthday}}" >
-              </ion-datetime> -->
-            </ion-item>
-    
-            <ion-item>
-              <ion-label color="dark" position="stacked">Email:</ion-label>
-              <!-- <ion-input inputmode="email" placeholder="Ex.: joe@doe.com" value="{{user_data.email}}"></ion-input> -->
-            </ion-item>
-    
-            <ion-item>
-              <ion-label color="dark" position="stacked">Address:</ion-label>
-              <!-- <ion-input inputmode="text" placeholder="Ex.: Abey Road 5" value ="{{user_data.address}}"></ion-input> -->
-            </ion-item>
-            <ion-item>
-              <ion-label color="dark" position="stacked">Phone number:</ion-label>
-              <!-- <ion-input type="number" placeholder="Ex.: 1234567890" value="{{user_data.phone}}"></ion-input> -->
-            </ion-item>
-          </ion-list>
-  
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  
-    <!-- <ion-button size="large" expand="full" color="dark" (click)="sendData()" no-margin>Edit</ion-button> -->
+      <ion-item>
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label color="dark"> {{Profile.birthday}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ion-label color="dark"> {{Profile.email}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="map-sharp" slot="start"></ion-icon>
+        <ion-label color="dark"> {{Profile.address}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="call" slot="start"></ion-icon>
+        <ion-label color="dark"> {{Profile.phone}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-card *ngIf="Stories">
+    <ion-list margin-bottom>
+      <ion-list-header color="light">
+        <ion-label class="fw700" style="text-align: center;">Stories</ion-label>
+      </ion-list-header>
+
+      <ion-card *ngFor="let story of Stories">
+        <ion-card-header>
+          <ion-card-subtitle>{{story.date}}</ion-card-subtitle>
+          <ion-card-title>Class name</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          Keep close to Nature's heart... and break clear away, once in awhile,
+          and climb a mountain or spend a week in the woods. Wash your spirit clean.
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ion-card>
+  <ion-card *ngIf="Summary">
+    <ion-list margin-bottom>
+      <ion-list-header color="light">
+        <ion-label class="fw700" style="text-align: center;">Summary</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-card>
+         <ion-card-content class="fix-content">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-subtitle>Attend</ion-card-subtitle>
+                    <ion-card-title>{{Summary.attend}} times</ion-card-title>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-subtitle>Absent</ion-card-subtitle>
+                    <ion-card-title>{{Summary.absent}} times</ion-card-title>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+         </ion-card-content>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <div class="progress-wrapper">
+          <div class="progress-bar" [style.width]="progressvalue + '%'">
+            {{progressvalue}}%
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
   </ion-card>
 </ion-content>
