@@ -12,17 +12,9 @@ export class AuthGuardService implements CanActivate {
     public userService : UserService,
     public router : Router
   ) {}
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
- 
-    let userAuthenticated = false; // Get the current authentication state from a Service!
- 
-    if (userAuthenticated) {
-      return true;
-    } else {
-      return false;
-    }
+
+  canActivate(): boolean {
+    return this.userService.isLoginIn;
   }
 }
 

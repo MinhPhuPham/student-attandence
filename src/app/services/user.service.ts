@@ -59,9 +59,10 @@ export class UserService {
     this.isLoading = false;
     return await this.loadingCtrl.dismiss() /*.then(() => console.log('loading dismissed'));*/
   }
-  isLoginIn(): boolean{
+
+  get isLoginIn(): boolean{
     const token = localStorage.getItem('token');
-    return (token !== null) ? false : true;
+    return (token !== null) ? true : false;
   }
 
   /* Method to login database */

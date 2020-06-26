@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     this.onLoginForm = this.formBuilder.group({
       'email': [null, Validators.compose([
         Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"),
+        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"),
         Validators.email
       ])],
       'password': [null, Validators.compose([
@@ -106,7 +106,7 @@ export class LoginPage implements OnInit {
   }
   
   async Login() {
-    this.user.loadingPresent('Welcome to app!!!', true);
+    this.user.loadingPresent('Welcome to app!!!', false);
     let user = {
       username: this.Email.value,
       password: this.Password.value
@@ -116,6 +116,7 @@ export class LoginPage implements OnInit {
        localStorage.setItem('token',data.token)
     },
     error =>{
+      this.user.loadingDismiss();
       console.log(error);
     },
     ()=>{
